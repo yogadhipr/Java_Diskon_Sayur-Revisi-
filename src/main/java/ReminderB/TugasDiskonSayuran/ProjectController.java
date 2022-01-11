@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 /**
  *
  * @author TUF GAMING
@@ -17,47 +16,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ProjectController {
+    
+    hitung h = new hitung();
+
     @RequestMapping("/input")
-    public String getData(HttpServletRequest data, Model discountprocess){
+    public String getData(HttpServletRequest data, Model hasil)
+    {
         
-        String inputname = data.getParameter("var_name");
-        String inputprice = data.getParameter("var_price");
-        String inputquantity = data.getParameter("var_quantity");
-        String inputpayment = data.getParameter("var_payment");
-        String diskon = "";
+        String nSayur = data.getParameter("var_nama");
+        String hSayur = data.getParameter("var_harga");
+        String qSayur = data.getParameter("quantity");
+        String uBayar = data.getParameter("var_bayar");
+                
+        Double harga = Double.valueOf(hSayur);
+        Double jumlah = Double.valueOf(qSayur);
+        Double bayar = Double.valueOf(uBayar);
         
-        Double iPrice = Double.valueOf(inputprice);
-        Double iTotal = Double.valueOf(inputquantity);
-        Double iPayment = Double.valueOf(inputpayment);
-        Double PriceTotal = iPrice * iTotal;
-        Double getTotal = null;
+        h.bayar(harga, jumlah);
+        h.getKet(bayar, hasil);
         
-         if (PriceTotal < 16000)
-        {
-            getTotal = PriceTotal - (0 * PriceTotal/100);
-            diskon = "0%";
-        }
-        else if (PriceTotal >= 16000 && PriceTotal < 25000)
-        {
-            getTotal = PriceTotal - (10 * PriceTotal/100);
-            diskon = "10%";
-        }
-        else
-        {
-            getTotal = PriceTotal - (15 * PriceTotal/100);
-            diskon = "15%";
-        }
-         
-        Double kembalian = iPayment - getTotal;
-         
-        discountprocess.addAttribute("name", inputname);
-        discountprocess.addAttribute("price", inputprice);
-        discountprocess.addAttribute("quantity", inputquantity);
-        discountprocess.addAttribute("total", getTotal);
-        discountprocess.addAttribute("payment", inputpayment);
-        discountprocess.addAttribute("diskon", diskon);
-        discountprocess.addAttribute("kembalian", kembalian);
-        
+        hasil.addAttribute("nama", nSayur);
+        hasil.addAttribute("harga", hSayur);
+        hasil.addAttribute("quantity", qSayur);
+        hasil.addAttribute("uBayar", uBayar);
+        hasil.addAttribute("hAwal", h.jBayar);
+        hasil.addAttribute("diskon", h.disc);
+        hasil.addAttribute("hDiskon", h.hDiskon);
+        hasil.addAttribute("tBayar", h.tBayar);
+                    
         return "view";
     }
 }

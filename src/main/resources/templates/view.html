@@ -13,13 +13,29 @@ and open the template in the editor.
     <body>
         <div>Receipt Detail</div>
         <hr><!-- comment -->
-        <tr>
-            <th>Nama Sayuran  : </th><td th:text="${name}"></td></br>
-            <th>Harga Sayuran : </th><td th:text="${price}"></td></br>
-            <th>Jumlah Beli   : </th><td th:text="${quantity}"></td></br>
-            <th>Total         : </th><td th:text="${total}"></td></br>
-            <th>Kembalian     : </th><td th:text="${kembalian}"></td></br>
-            <th>Selamat anda mendapat diskon sebesar </th><td th:text="${diskon}"></td></br>
-        </tr>
+        <table border="1" cellspacing="1" cellspading="10">
+            
+            <th>Nama Sayuran</th>
+            <th>Jumlah</th>
+            <th>Harga Satuan (Rp)</th><!-- comment -->
+            <th>Harga Awal (Rp)</th>
+            <th>Diskon (Rp)</th>
+            <th>Harga Akhir (Rp)</th>
+            <th>Uang Dibayarkan (Rp)</th>
+            <th>Keterangan</th>
+            
+            <tr>
+                <td th:text="${nama}"></td></br>
+                <td th:text="${quantity}"></td></br>
+                <td th:text="${harga}"></td></br>
+                <td th:text="${hAwal}"></td></br>
+                <td th:text="${hDiskon}"></td></br>
+                <td th:text="${tBayar}"></td></br>
+                <td th:text="${uBayar}"></td></br>
+                <th th:text="${ket}"></th>
+            </tr>
+        </table>
+        <br>
+        <th>Selamat anda mendapat diskon sebesar </th><td th:text="${diskon}"></td><th>%</th></br>
     </body>
 </html> 
